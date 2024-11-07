@@ -2,7 +2,16 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Heart, Sparkles, Stars } from 'lucide-react'
 import FloatingElements from './FloatingElements'
-import Modal from './Modal'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import clsx from 'clsx'
+
 
 const friendImageStacks = [
   [
@@ -26,6 +35,8 @@ const friendImageStacks = [
 export default function BirthdayPage() {
   const [isCardOpen, setIsCardOpen] = useState(false)
   const [isPlaying, setIsPlaying] = useState(true)
+  const [text, setText] = useState("Edo Saradaga petta em secret message ledu")
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const audio = new Audio('./music.mp3')
@@ -43,6 +54,51 @@ export default function BirthdayPage() {
     }
   }, [isPlaying])
 
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setText(`
+     <p class="font-semibold text-lg text-red-600">
+          🎉🎂🎈 Happiest Birthday to the most amazing friend in the world! 🎉🎂🎈
+        </p>
+        <p class="mt-4 text-gray-700">
+          🌟 Days are better when you are around, and I hope your birthday is filled with love, laughter, and endless joy. 🌟
+          🎁 May your day be as special as you are to me. 🎁
+        </p>
+        <p class="mt-4">
+          💖 You have been a great person from the day I met you, and you have encouraged and supported me through every situation. 💖
+        </p>
+
+        <p class="mt-2 italic text-green-700">
+          Inka manaki English radu kani, Akhi firstly chala thanks ra🫰🏻, assala eppudu anukoledu nuvvu intha close ayipotav ani.
+          Ala aa kallatho👀, sweet voice🎶, tho bale matladutav telusa 🤩💫! konni sarlu ayithe oka therapy la anipistundhi netho matalu🤗.
+        </p>
+
+        <p class="mt-2 italic text-green-700">
+          Appudu appudu chala happy vuntundhi ra, ne lanti manchi frnd dorikindhi ani kani anukune lopu, deggaralo levu anedi gurthuvastundhi😔.
+        </p>
+
+        <p class="mt-2 font-semibold text-pink-600">
+          Nannu seriously chala mandi "Hanee" ani pilustaru, but nee antha sweet ga evaru pilavaru telusa🌠.
+        </p>
+
+        <p class="mt-2 italic text-green-700">
+          Eppudu saradaga matladukune vallam, saradhi sir ki prati sari dorikipoyevallam, iddaram kalisi teju tho adukoni.
+        </p>
+
+        <p class="mt-2 font-semibold text-pink-600">
+          But aa day chudu n8 ekkuva saradaga matladukunnam 🤩,that day is one of the most memorable and special day. abba aa days pure ga nenu njoy chesina days abba.\n
+          inka aa orange dress lo mess nundi vachav chudu, nijamga angel lekka vunnav🪽\n
+          Aa days alane vuntai anukunna kani sudden ga mayam ayipoyav 😖.
+          Adi last day la kakunda manam malli colleauges la kalisi work cheyyali ani korukuntunna itlu ne
+        </p>
+        <h1 class="text-red-500 text-end">-Hanee🍯❤️</h1>
+      `);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [showModal]);
   const toggleMusic = () => {
     setIsPlaying(!isPlaying)
   }
@@ -66,7 +122,7 @@ export default function BirthdayPage() {
         >
           Happy Birthday, Akhi!❤️
           <p className="text-3xl text-purple-600 font-medium mt-4">
-            To the most amazing friend in the world ♥
+            To the most amazing girl in the world ♥
           </p>
 
         </motion.h1>
@@ -83,13 +139,39 @@ export default function BirthdayPage() {
           {isPlaying ? 'Pause Music' : 'Play Music'}
         </motion.button>
       </div>
+      <div className="flex justify-center ">
+        <Dialog onClick={() => {
+          setShowModal(true)
+        }}>
+          <DialogTrigger asChild>
+            <Button
+              variant="outline"
+              className="mt-10 relative overflow-hidden group animate-bounce hover:animate-none"
+            >
+              <span className="relative z-10 group-hover:text-primary-foreground transition-colors duration-300">
+                Secret Message
+              </span>
+              <Heart className="inline-block ml-2 text-red-500 group-hover:text-primary-foreground transition-colors duration-300" />
+              <span className="absolute inset-0 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogDescription className="font-bold text-black  relative">
+                <div className={clsx("absolute inset-0  rounded-lg bg-gradient-to-r from-pink-300 via-red-300 to-yellow-300 opacity-50")}></div>
+                <div className={clsx('text-sm leading-5 p-2')} dangerouslySetInnerHTML={{ __html: text }} />
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      </div>
     </motion.div>
   )
 }
 
 function BirthdayCard({ isOpen, setIsOpen }) {
 
-    const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -148,9 +230,10 @@ function BirthdayCard({ isOpen, setIsOpen }) {
             className="absolute w-full h-full bg-white rounded-lg shadow-lg p-6 backface-hidden"
           >
             <p className="text-lg text-center text-pink-600 font-dancing">
-              Dearest Akhi,<br /><br />
+              Dearest Akhi,👧🏻<br /><br />
               On this special day, may your world be filled with love, laughter, and endless joy. Your friendship is a treasure, and I'm so grateful to celebrate another year of your amazing journey through life.<br /><br />
-              Happy Birthday, my dear best friend!
+              Happy Birthday, my dear best friend!🫂
+
             </p>
           </motion.div>
         )}
@@ -167,9 +250,11 @@ function Gallery() {
       transition={{ delay: 1, duration: 0.8 }}
       className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-12"
     >
+
       {friendImageStacks.map((stack, index) => (
         <ImageFrame key={index} images={stack} alt={`Friend Image Stack ${index + 1}`} />
       ))}
+
     </motion.div>
   )
 }
