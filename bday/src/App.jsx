@@ -35,7 +35,7 @@ const friendImageStacks = [
 export default function BirthdayPage() {
   const [isCardOpen, setIsCardOpen] = useState(false)
   const [isPlaying, setIsPlaying] = useState(true)
-  const [text, setText] = useState("Edo Saradaga petta em secret message ledu")
+  const [text, setText] = useState("Edo Saradaga petta em secret message ledu bongu ledu 🤭🥴🤪")
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function BirthdayPage() {
         </p>
         <h1 class="text-red-500 text-end">-Hanee🍯❤️</h1>
       `);
-    }, 1000);
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, [showModal]);
