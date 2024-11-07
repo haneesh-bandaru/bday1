@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Heart, Sparkles, Stars } from 'lucide-react'
 import FloatingElements from './FloatingElements'
+import Modal from './Modal'
 
 const friendImageStacks = [
   [
@@ -15,8 +16,8 @@ const friendImageStacks = [
     './akhi5.jpeg',
   ],
   [
-    './us2.jpeg',
     './akhi2.png',
+    './us2.jpeg',
     './akhi4.jpeg',
   ],
 
@@ -67,6 +68,7 @@ export default function BirthdayPage() {
           <p className="text-3xl text-purple-600 font-medium mt-4">
             To the most amazing friend in the world ♥
           </p>
+
         </motion.h1>
         <BirthdayCard isOpen={isCardOpen} setIsOpen={setIsCardOpen} />
 
@@ -86,6 +88,12 @@ export default function BirthdayPage() {
 }
 
 function BirthdayCard({ isOpen, setIsOpen }) {
+
+    const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
+
   return (
     <motion.div
       className="relative w-96 h-64 mx-auto mb-12 cursor-pointer"
@@ -140,7 +148,7 @@ function BirthdayCard({ isOpen, setIsOpen }) {
             className="absolute w-full h-full bg-white rounded-lg shadow-lg p-6 backface-hidden"
           >
             <p className="text-lg text-center text-pink-600 font-dancing">
-              Dearest Sarah,<br /><br />
+              Dearest Akhi,<br /><br />
               On this special day, may your world be filled with love, laughter, and endless joy. Your friendship is a treasure, and I'm so grateful to celebrate another year of your amazing journey through life.<br /><br />
               Happy Birthday, my dear best friend!
             </p>
@@ -194,7 +202,7 @@ function ImageFrame({ images, alt }) {
               transition={{ duration: 0.5 }}
               className="absolute inset-0"
             >
-              <img className="rounded object-cover h-[300px]" src={images[currentIndex]}  alt={`${alt} - Image ${currentIndex + 1}`} width={500} height={300}  />
+              <img className="rounded object-cover h-[300px]" src={images[currentIndex]} alt={`${alt} - Image ${currentIndex + 1}`} width={500} height={300} />
             </motion.div>
           </AnimatePresence>
         </div>
